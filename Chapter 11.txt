@@ -1,0 +1,58 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct ClassRoster
+{
+	string name;
+	int idnum;
+	int scores[3];
+	double average;
+	string grade;
+};
+
+int main()
+{
+	ClassRoster student;
+	double total = 0;
+
+	cout << "Enter the name of the student: ";
+	getline(cin, student.name);
+
+	cout << "Enter the student's ID number: ";
+	cin >> student.idnum;
+
+	cout << "Enter the student's test scores: " << endl;
+	for (int count = 0; count < 3; count++)
+	{
+		cout << "Test " << count + 1 << ": ";
+		cin >> student.scores[count];
+	}
+
+	for (int count = 0; count < 3; count++)
+		total += student.scores[count];
+	student.average = total / 3;
+
+	if (student.average >= 91)
+		student.grade = "A";
+	else if (student.average >= 81)
+		student.grade = "B";
+	else if (student.average >= 71)
+		student.grade = "C";
+	else if (student.average >= 61)
+		student.grade = "D";
+	else
+		student.grade = "F";
+
+	system("cls");
+
+	cout << "STUDENT INFO" << endl;
+	cout << "Name: " << student.name << endl;
+	cout << "ID Number: " << student.idnum << endl;
+	cout << "Test Average: " << student.average << endl;
+	cout << "Grade: " << student.grade << endl;
+
+	system("pause");
+    return 0;
+}

@@ -1,0 +1,49 @@
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+
+int main()
+{
+	const int ARRAY_SIZE = 12;
+	int numbers[ARRAY_SIZE];
+	int count = 0;
+	int lowest;
+	int highest;
+	int total = 0;
+	int average;
+	ifstream inputFile;
+
+	inputFile.open("C:\\Users\\Joe\\Desktop\\numbers.txt");
+
+	while (count < ARRAY_SIZE && inputFile >> numbers[count])
+		count++;
+
+	inputFile.close();
+
+	lowest = numbers[0];
+	for (count = 1; count < ARRAY_SIZE; count++)
+	{
+		if (numbers[count] < lowest)
+			lowest = numbers[count];
+	}
+
+	highest = numbers[0];
+	for (count = 1; count < ARRAY_SIZE; count++)
+	{
+		if (numbers[count] > highest)
+			highest = numbers[count];
+	}
+
+	for (int count = 0; count < ARRAY_SIZE; count++)
+		total += numbers[count];
+	average = total / ARRAY_SIZE;
+
+	cout << "The lowest number is: " << lowest << endl;
+	cout << "The highest number is: " << highest << endl;
+	cout << "The total of the numbers is: " << total << endl;
+	cout << "The average of the numbers is: " << average << endl;
+	system("pause");
+	return 0;
+}

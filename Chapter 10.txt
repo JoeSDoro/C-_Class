@@ -1,0 +1,67 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+void upper(char []);
+void lower(char []);
+void reverse(char []);
+
+int main()
+{
+	const int SIZE = 5;
+	char letters[SIZE];
+
+	cout << "Enter four letters in any combination of upper and lower case. ";
+	cin.getline(letters, SIZE);
+
+	upper(letters);
+	lower(letters);
+	reverse(letters);
+
+	system("PAUSE");
+
+	return 0;
+}
+
+void upper(char uppercase[])
+{
+	int count = 0;
+
+	cout << "These are the letters in all uppercase: ";
+	while (uppercase[count])
+	{
+		putchar(toupper(uppercase[count]));
+			count++;
+	}
+	cout << endl;
+}
+void lower(char lowercase[])
+{
+	int count = 0;
+
+	cout << "These are the letters in all lowercase: ";
+	while (lowercase[count])
+	{
+		putchar(tolower(lowercase[count]));
+		count++;
+	}
+	cout << endl;
+
+}
+void reverse(char reverse[])
+{
+	cout << "These are the letters in reverse case: ";
+
+	for (int count = 0; count < strlen(reverse); count++) 
+	{
+		if (isupper(reverse[count]))
+			reverse[count] = tolower(reverse[count]);
+		else
+			if (islower(reverse[count]))
+				reverse[count] = toupper(reverse[count]);
+		cout << reverse[count];
+	}
+	cout << endl;
+
+}

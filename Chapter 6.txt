@@ -1,0 +1,36 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+int multiFunction(int, char, int);
+
+int main()
+{
+	int value1, value3;
+	char value2;
+
+	cout << "This program will sovle an equation!" << endl;
+	cout << "Please enter the first number: ";
+	cin >> value1;
+	cout << "Please enter the equation type using +, -, *, or /: ";
+	cin >> value2;
+	cout << "Please enter the second number: ";
+	cin >> value3;
+	cout << "Your answer is " << multiFunction(value1, value2, value3) << "!" << endl;
+	system("pause");
+	return 0;
+}
+
+int multiFunction(int num1, char sign, int num2)
+{
+	switch(sign)
+	{
+	case '+': return (num1 + num2);
+		break;
+	case '-': return (num1 - num2);
+		break;
+	case '*': return (num1 * num2);
+		break;
+	case '/': return (num1 / num2);
+	}
+}

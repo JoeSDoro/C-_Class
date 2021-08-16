@@ -1,0 +1,43 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+void reverseARRAY(int [], int);
+
+int main()
+{
+	const int SIZE = 5;
+	int numbers[SIZE] = { 10, 20, 30, 40, 50 };
+	int count;
+
+
+	cout << "The numbers in the array are: ";
+
+	for (count = 0; count < SIZE; count++)
+		cout << " " << numbers[count];
+	cout << endl;
+
+	reverseARRAY(numbers, SIZE);
+
+	system("PAUSE");
+
+	return 0;
+}
+
+void reverseARRAY(int input[], int size)
+{
+	int* newArray = NULL;
+	newArray = new int[size];
+	int count; 
+	int *ptr = nullptr;
+	ptr = &input[size];
+
+	cout << "The numbers in the array backwards are: ";
+	for (count = 0; count < size; count++)
+	{
+		ptr--;
+		newArray[count] = *ptr;
+		cout << newArray[count] << " ";
+	}
+	cout << endl;
+}

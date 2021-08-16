@@ -1,0 +1,170 @@
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int DESC_SIZE = 51;
+
+struct Date
+{
+	int month;
+	int day;
+	int year;
+};
+
+struct Inventory
+{
+	char description[DESC_SIZE];
+	int qty;
+	double wholeCost;
+	double retailCost;
+	double average;
+	Date dateAdded;
+};
+
+int main()
+{
+	Inventory item;
+	char again;
+
+	fstream items("items.txt", ios::out | ios::binary);
+
+	do
+	{
+		cout << "Enter a brief description of the item:  " << endl;
+		cin.getline (item.description, DESC_SIZE);
+
+		cout << "What is the quantity on hand? " << endl;
+		cin >> item.qty;
+
+		cout << "What is the wholesale cost? " << endl;
+		cin >> item.wholeCost;
+
+		cout << "What is the retail cost? " << endl;
+		cin >> item.retailCost;
+
+		system("cls");
+
+		cout << "Enter the date the item was added to inventory: " << endl;
+
+		cout << "Month: ";
+		cin >> item.dateAdded.month;
+
+		cout << "Day: ";
+		cin >> item.dateAdded.day;
+
+		cout << "Year: ";
+		cin >> item.dateAdded.year;
+
+		items.write(reinterpret_cast<char *>(&item), sizeof(item));
+
+		system("cls");
+
+		cout << "Do you want to enter another item record? ";
+		cin >> again;
+		cin.ignore();
+
+		system("cls");
+
+	} while (again == 'Y' || again == 'y');
+
+	items.close();
+	return 0;
+}
+
+READ PROGRAM
+
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int DESC_SIZE = 51;
+
+struct Date
+{
+	int month;
+	int day;
+	int year;
+};
+
+struct Inventory
+{
+	char description[DESC_SIZE];
+	int qty;
+	double wholeCost;
+	double retailCost;
+	double average;
+	Date dateAdded;
+};
+
+int main()
+{
+	Inventory item;
+	char again;
+	int totalQty = 0;
+	double totalWhole = 0;
+	double totalRetail = 0;
+	fstream items;
+
+	items.open("items.txt", ios::in | ios::binary);
+
+	if (!items)
+	{
+		cout << "There was an error while opening the file. Please try again later./n";
+		return 0;
+	}
+
+	cout << "Here are the items in inventory: " << endl;
+
+	items.read(reinterpret_cast<char *>(&item), sizeof(item));
+
+	for (int count = 0; count < 5; count++) 
+		totalQty += item.qty;
+
+	for (int count = 0; count < 5; count++)
+		totalWhole += item.wholeCost;
+
+	for (int count = 0; count < 5; count++)
+		totalRetail += item.retailCost;
+
+	cout << "The Total Quantity of all inventory items is: ";
+	cout << totalQty << endl;
+	
+	cout << "The total wholesale value of all inventory items is: ";
+	cout << totalWhole << endl;
+
+	cout << "The total retail value of all inventory items is: ";
+	cout << totalRetail << endl;
+
+	system("pause");
+	system("cls");
+
+	while (!items.eof())
+	{
+		cout << "Item Description:  " << endl;
+		cout << item.description << endl;
+
+		cout << "Quantity on Hand: " << endl;
+		cout << item.qty << endl;
+
+		cout << "Wholesale Cost: " << endl;
+		cout << item.wholeCost << endl;
+
+		cout << "Retail Cost: " << endl;
+		cout << item.retailCost << endl;
+
+		cout << "Date Added to Inventory: " << endl;
+		cout << item.dateAdded.month << "/" << item.dateAdded.day << "/" << item.dateAdded.year << endl;
+
+		cout << "Press the enter key to see the next record.";
+		cin.get(again);
+
+		items.read(reinterpret_cast<char *>(&item), sizeof(item));
+	} 
+
+	cout << "That is all the items in Inventory." << endl;
+	system("pause");
+	items.close();
+	return 0;
+}
